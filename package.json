@@ -1,0 +1,17 @@
+{
+  "name": "tape-club",
+  "version": "1.0.0",
+  "description": "Clube de cinema particular com alma de locadora de VHS.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch server/index.js",
+    "test": "node --disable-warning=ExperimentalWarning --test",
+    "demo": "node --disable-warning=ExperimentalWarning dev/demo.js",
+    "bot": "python bot/server.py"
+  }
+}

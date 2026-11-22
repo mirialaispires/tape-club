@@ -1,0 +1,93 @@
+/* tape-club — tokens. Toda cor, fonte e medida do sistema nasce aqui.
+   Paleta oficial: creme #F3E8D2 · tomate #C94E36 · mostarda #E5B64F · petróleo #416A70 · café #594337 */
+:root {
+  /* vinho, bordô, creme envelhecido, mostarda, vermelho queimado, madeira e um fio de roxo */
+  --wine-950: #150709;
+  --wine-900: #22090f;
+  --wine-800: #35101a;
+  --bordo: #5a1b2b;
+  --bordo-hi: #7b2a3d;
+  --cream: #e8dcc0;
+  --cream-hi: #f5ecd6;
+  --cream-lo: #dccdab;
+  --cream-deep: #c7b58b;
+  --tomato: #b4452c;
+  --tomato-deep: #8c3220;
+  --tomato-pale: #ecc9b8;
+  --mustard: #dba944;
+  --mustard-deep: #b98626;
+  --mustard-pale: #f0dba3;
+  --plum: #4a2a5c;
+  --plum-hi: #8a5ea3;
+  /* o antigo "petróleo" virou bordô: mesmo papel nos componentes (apoio frio → apoio profundo) */
+  --petrol: #6a2335;
+  --petrol-deep: #4a1624;
+  --petrol-pale: #ead7cd;
+  --coffee: #3d2a21;
+  --coffee-deep: #24160f;
+  --wood: #6b4129;
+  --wood-hi: #94603b;
+  --wood-lo: #3b2214;
+
+  /* nomes usados pelos componentes de base */
+  --paper: var(--cream);
+  --paper-hi: var(--cream-hi);
+  --paper-lo: var(--cream-lo);
+  --ink: #2a1c17; /* texto: marrom-escuro quente, nunca preto */
+  --ink-soft: #4d3a31;
+  --ink-faint: #695347; /* ≥ 4,5:1 sobre o creme */
+  --rule: rgba(42, 28, 23, 0.2);
+  --red: var(--tomato);
+  --red-deep: var(--tomato-deep);
+  --yellow: var(--mustard);
+  --blue: var(--petrol);
+  --green: var(--petrol-deep);
+  --on-red: #fff3e0;
+  --shelf: var(--coffee);
+  --shelf-2: #5a4033;
+  --on-shelf: var(--cream);
+  --crt: var(--petrol-deep);
+  --plastic: #cfc4a6;
+
+  /* tipografia — títulos editoriais (serifa suave), interface legível, rótulos condensados, recados à mão (uso raro) */
+  --f-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, 'DejaVu Serif', serif;
+  --f-body: 'Barlow', 'Helvetica Neue', Arial, 'DejaVu Sans', sans-serif;
+  --f-sign: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', 'DejaVu Sans Condensed', sans-serif;
+  --f-hand: 'Caveat', 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive;
+  --f-type: var(--f-body);
+
+  /* escala */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 72px;
+  --gutter: clamp(14px, 3.4vw, 40px);
+  --max: 1240px;
+  --head-h: 84px;
+
+  /* forma, profundidade e movimento */
+  --edge: 1px solid rgba(42, 28, 23, 0.34);
+  --radius: 8px;
+  --radius-lg: 14px;
+  --lift-1: 0 1px 0 rgba(255, 246, 225, 0.55) inset, 0 1px 2px rgba(12, 4, 4, 0.38), 0 6px 14px -6px rgba(12, 4, 4, 0.5);
+  --lift-2: 0 1px 0 rgba(255, 246, 225, 0.55) inset, 0 2px 4px rgba(12, 4, 4, 0.35), 0 16px 32px -12px rgba(12, 4, 4, 0.6);
+  --hard: var(--lift-1);
+  --hard-sm: 0 1px 0 rgba(255, 246, 225, 0.5) inset, 0 1px 2px rgba(12, 4, 4, 0.35), 0 3px 8px -3px rgba(12, 4, 4, 0.45);
+  --ease: cubic-bezier(0.22, 0.8, 0.24, 1);
+  --ease-snap: cubic-bezier(0.3, 1.5, 0.5, 1);
+  --ease-walk: cubic-bezier(0.45, 0, 0.2, 1);
+  --t-fast: 120ms;
+  --t-mid: 220ms;
+  --t-slow: 360ms;
+
+  /* prateleiras */
+  --row-h: 252px;
+  --board: 18px;
+}
+@media (max-width: 720px) {
+  :root { --row-h: 214px; --board: 15px; --head-h: 62px; }
+}

@@ -1,0 +1,40 @@
+/* Tape Bot: cabine de consulta com o mesmo papel, tinta e carretel do corredor. */
+.bot-page { max-width: 1000px; margin: 0 auto; }
+.bot-panel { overflow: hidden; background: var(--paper-hi); border: var(--edge); box-shadow: var(--hard); }
+.bot-panel__header { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--ink); color: var(--paper); }
+.bot-panel__header b, .bot-panel__header small { display: block; }
+.bot-panel__header b { font: 600 19px/1.1 var(--f-display); }
+.bot-panel__header small { margin-top: 4px; color: var(--cream-lo); font: 400 13px/1.4 var(--f-body); }
+.bot-reel { width: 38px; height: 38px; flex: none; border: 3px solid var(--mustard); border-radius: 50%; background: radial-gradient(circle, var(--ink) 0 5px, transparent 6px), conic-gradient(var(--mustard) 0 60deg, transparent 60deg 120deg, var(--mustard) 120deg 180deg, transparent 180deg 240deg, var(--mustard) 240deg 300deg, transparent 300deg); }
+.bot-log { display: grid; align-content: start; gap: var(--s-4); min-height: 260px; max-height: min(58vh, 680px); overflow-y: auto; padding: var(--s-5); background: linear-gradient(rgba(242, 229, 200, .55), rgba(242, 229, 200, .55)), repeating-linear-gradient(0deg, transparent 0 31px, rgba(80, 52, 30, .08) 32px); }
+.bot-message { width: fit-content; max-width: min(780px, 95%); padding: 12px 15px; border: 2px solid var(--ink); background: var(--paper-hi); box-shadow: var(--hard-sm); }
+.bot-message--user { justify-self: end; background: #f3dfaa; transform: rotate(.25deg); }
+.bot-message--assistant { justify-self: start; transform: rotate(-.2deg); }
+.bot-message__label { font: 700 12px/1.2 var(--f-sign); letter-spacing: .14em; text-transform: uppercase; color: var(--red-deep); }
+.bot-message__text { margin: 5px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 400 15px/1.55 var(--f-body); color: var(--ink); }
+.bot-message__intent { display: block; margin-top: 8px; color: var(--ink-faint); font: 600 11px var(--f-sign); letter-spacing: .06em; }
+.bot-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: var(--s-3); margin-top: var(--s-4); }
+.bot-card { min-width: 0; display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 12px; padding: 10px; background: var(--paper); border: 1.5px solid var(--ink); box-shadow: 2px 2px 0 rgba(29, 26, 21, .3); }
+.bot-card__poster { width: 90px; min-height: 126px; background: var(--paper-lo); display: grid; place-items: center; }
+.bot-card__poster img { width: 100%; height: 135px; object-fit: cover; }
+.bot-card__no-poster { padding: 8px; text-align: center; color: var(--ink-faint); font: 600 12px var(--f-sign); }
+.bot-card__info { min-width: 0; display: grid; align-content: start; gap: 7px; }
+.bot-card__title { margin: 0; font: 600 19px/1.05 var(--f-display); overflow-wrap: anywhere; }
+.bot-card__meta, .bot-card__overview { margin: 0; font: 400 13px/1.4 var(--f-body); color: var(--ink-soft); }
+.bot-card__overview { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; }
+.bot-card__score { color: var(--red-deep); font: 700 11px/1.2 var(--f-sign); }
+.bot-suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.bot-suggestions .btn { min-height: 34px; text-align: left; text-transform: none; letter-spacing: 0; font-size: 13px; white-space: normal; }
+.bot-compose { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: var(--s-3); padding: var(--s-4) var(--s-5); border-top: 2px dashed var(--rule); background: var(--paper-hi); }
+.bot-input { min-height: 50px; max-height: 160px; }
+.bot-status { margin: 0; padding: 0 var(--s-5) var(--s-3); color: var(--ink-soft); font: 600 13px var(--f-sign); }
+.bot-disclaimer { margin: 0; padding: 0 var(--s-5) var(--s-4); color: var(--ink-faint); font: 400 12px/1.45 var(--f-body); }
+@media (max-width: 560px) {
+  .bot-log { min-height: 220px; padding: var(--s-3); }
+  .bot-message { max-width: 100%; }
+  .bot-compose { grid-template-columns: 1fr; padding: var(--s-3); }
+  .bot-compose .btn { justify-self: end; }
+  .bot-card { grid-template-columns: 76px minmax(0, 1fr); gap: 9px; }
+  .bot-card__poster { width: 76px; }
+  .bot-card__poster img { height: 114px; }
+}

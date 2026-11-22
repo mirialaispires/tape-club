@@ -1,0 +1,56 @@
+/* Superfícies: cartões de creme envelhecido com borda fina, sombra em camadas e grão sutil.
+   A sombra e a borda ficam no corpo do cartão; nada é recortado nem inclinado. */
+.paper { position: relative; display: block; min-width: 0; }
+.paper__body {
+  position: relative; min-width: 0; padding: var(--s-5); border-radius: var(--radius-lg); border: 1px solid rgba(255, 246, 225, 0.55);
+  background: linear-gradient(180deg, var(--cream-hi), var(--cream) 140%); box-shadow: var(--lift-2);
+  transition: transform var(--t-mid) var(--ease), box-shadow var(--t-mid) var(--ease);
+}
+.paper__body::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: url('/img/noise.svg') 0 0 / 220px 220px; opacity: 0.07; mix-blend-mode: multiply; pointer-events: none; }
+@media (hover: hover) {
+  .paper--lift:hover .paper__body, .ind .paper__body:hover, .rv .paper__body:hover, .card .paper__body:hover { transform: translateY(-2px); box-shadow: 0 1px 0 rgba(255, 246, 225, 0.55) inset, 0 3px 6px rgba(12, 4, 4, 0.35), 0 22px 38px -14px rgba(12, 4, 4, 0.7); }
+}
+.paper--mustard .paper__body { background: linear-gradient(180deg, var(--mustard-pale), #e6c97c 160%); }
+.paper--petrol .paper__body { background: linear-gradient(180deg, var(--petrol-pale), #dcc3b8 160%); }
+.paper--tomato .paper__body { background: linear-gradient(180deg, var(--tomato-pale), #dfae9a 160%); }
+.paper--pink .paper__body { background: linear-gradient(180deg, #f1d3c6, #e4b9a8 160%); }
+.paper--solid-tomato .paper__body { background: linear-gradient(180deg, var(--tomato), var(--tomato-deep)); color: var(--on-red); }
+/* cartão escuro: vinho com um fio de luz no topo; o texto passa a ser claro */
+.paper--wine .paper__body { background: radial-gradient(120% 90% at 20% 0%, var(--bordo-hi), var(--bordo) 45%, var(--wine-800)); border-color: rgba(255, 220, 170, 0.22); color: var(--cream-hi); }
+.paper--wine .paper__body::after { mix-blend-mode: screen; opacity: 0.05; }
+.paper--wine .note-kicker, .paper--wine .ind__rule, .paper--wine .faint { color: var(--mustard-pale); }
+.paper--wine .note-text, .paper--wine .note-title, .paper--wine .ind__pair { color: var(--cream-hi); }
+.paper--wine .linkish, .paper--wine a { color: var(--cream-hi); text-decoration-color: var(--mustard); }
+.paper--wine .ind__big { color: var(--mustard); }
+.paper--plum .paper__body { background: radial-gradient(120% 90% at 20% 0%, #6a4380, var(--plum) 55%, #2e1a3c); border-color: rgba(220, 190, 255, 0.2); color: var(--cream-hi); }
+
+/* títulos de recado: chamada editorial em serifa, com um fio de destaque */
+.note-title { font: 600 clamp(30px, 4.4vw, 50px)/1.02 var(--f-display); color: var(--ink); letter-spacing: -0.015em; }
+.note-title em { display: block; font-style: italic; font-weight: 500; color: var(--tomato-deep); }
+.paper--wine .note-title em { color: var(--mustard); }
+.note-title--sm { font-size: clamp(21px, 2.6vw, 27px); }
+.note-rule { display: block; width: 64px; height: 3px; margin: var(--s-3) 0; background: linear-gradient(90deg, var(--tomato), var(--mustard)); border-radius: 2px; }
+.note-text { font: 500 17px/1.5 var(--f-body); color: var(--ink); }
+.note-hand { font: 600 23px/1.15 var(--f-hand); color: var(--tomato-deep); }
+.note-kicker { font: 600 12.5px/1 var(--f-sign); letter-spacing: 0.18em; text-transform: uppercase; color: var(--tomato-deep); }
+
+/* etiqueta de preço/classificação */
+.pricetag { position: relative; display: inline-block; padding: 5px 11px 4px; background: var(--mustard); color: var(--ink); font: 700 13px/1 var(--f-sign); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; border-radius: 4px; box-shadow: 0 1px 0 rgba(255, 246, 225, 0.5) inset, 0 2px 4px rgba(12, 4, 4, 0.35); }
+.pricetag--tomato { background: var(--tomato); color: var(--on-red); }
+.pricetag--petrol { background: var(--petrol); color: #f6ecdd; }
+.pricetag--cream { background: var(--cream-hi); }
+
+/* placa de setor: latão escuro gravado, preso na parte de cima do armário */
+.placard { position: relative; z-index: 3; display: block; width: fit-content; max-width: 100%; margin: 0 0 -12px 18px; filter: drop-shadow(0 8px 10px rgba(8, 2, 2, 0.55)); }
+.placard__body {
+  position: relative; display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px var(--s-5); padding: 11px 24px 10px 20px; border-radius: 8px;
+  background: linear-gradient(180deg, #4a1b27, var(--wine-800)); border: 1px solid rgba(235, 190, 110, 0.5);
+  box-shadow: 0 1px 0 rgba(255, 226, 170, 0.28) inset, 0 -1px 0 rgba(0, 0, 0, 0.5) inset;
+}
+.placard__body::before { content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 3px; border-radius: 0 2px 2px 0; background: linear-gradient(var(--mustard), var(--tomato)); }
+.placard__title { font: 600 clamp(24px, 3.4vw, 36px)/1 var(--f-display); font-style: italic; color: var(--cream-hi); letter-spacing: -0.01em; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5); }
+.placard__link { font: 600 13px/1 var(--f-sign); letter-spacing: 0.14em; text-transform: uppercase; color: var(--mustard); text-decoration: none; border-bottom: 1.5px solid rgba(219, 169, 68, 0.5); padding-bottom: 2px; }
+.placard__link:hover { color: var(--cream-hi); border-color: var(--cream-hi); }
+.placard__count { font: 600 13px/1 var(--f-sign); letter-spacing: 0.12em; text-transform: uppercase; color: var(--mustard-pale); }
+
+.underline-hand { background: linear-gradient(transparent 62%, rgba(219, 169, 68, 0.6) 62%); }

@@ -1,0 +1,105 @@
+/* O corredor: locadora em primeira pessoa, feita de planos CSS 3D.
+   A câmera é o translateZ do "mundo" (scene.js controla --cam). Unidades em px de mundo. */
+.hall {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  background: linear-gradient(#2a0e16, #1a090d); /* fallback: sem 3D, vira esta parede vinho */
+}
+.hall__stage {
+  position: absolute; inset: 0; perspective: 900px; perspective-origin: 50% 43%;
+}
+.hall__world {
+  position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d;
+  transform: translate3d(0, 0, var(--cam, 0px)); will-change: transform;
+}
+.plane { position: absolute; backface-visibility: visible; transform-style: flat; }
+
+/* medidas do mundo: meio-corredor 380 · piso +260 · teto −300 · comprimento 3800 (+800 para trás da câmera) */
+.plane--floor, .plane--ceil { left: -380px; width: 760px; height: 4600px; transform-origin: 0 0; }
+.plane--floor { top: 0; transform: translate3d(0, 260px, 800px) rotateX(-90deg); background: var(--carpet-a); }
+.plane--ceil { top: 0; transform: translate3d(0, -300px, 800px) rotateX(-90deg); background-color: #1d0b10; }
+.plane--wall { top: -300px; width: 4600px; height: 560px; transform-origin: 0 0; background-size: 840px 560px; background-repeat: repeat-x; }
+.plane--wall-l { left: 0; transform: translate3d(-380px, 0, 800px) rotateY(90deg); background-image: url('/img/scene/shelves.svg'); }
+.plane--wall-r { left: 0; transform: translate3d(380px, 0, -3800px) rotateY(-90deg); background-image: url('/img/scene/shelves-b.svg'); background-position: 420px 0; }
+
+.plane--floor {
+  --carpet-a: url('/img/scene/carpet.svg') 0 0 / 96px 96px, #4a1420;
+  background: url('/img/scene/carpet.svg') 0 0 / 96px 96px, #4a1420;
+}
+.plane--floor::before { /* faixas de luz no tapete, uma por luminária do teto */
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(to bottom, transparent 0, rgba(255, 186, 100, 0.34) 70px, transparent 160px, transparent 360px);
+}
+.plane--floor::after, .plane--ceil::after, .plane--wall::after { content: ''; position: absolute; inset: 0; }
+/* neblina quente: o fundo do corredor mergulha num âmbar escuro — profundidade de campo sem apagar a leitura */
+.plane--floor::after { background: linear-gradient(to bottom, transparent 0, transparent 22%, rgba(54, 20, 20, 0.86) 100%); }
+.plane--ceil::after { background: linear-gradient(to bottom, transparent 0, transparent 22%, rgba(40, 14, 16, 0.85) 100%); }
+.plane--wall-l::after { background: linear-gradient(to right, transparent 0, transparent 22%, rgba(54, 20, 20, 0.84) 100%); }
+.plane--wall-r::after { background: linear-gradient(to left, transparent 0, transparent 22%, rgba(54, 20, 20, 0.84) 100%); }
+
+.plane--ceil {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.45) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.45) 2px, transparent 2px);
+  background-size: 95px 95px;
+}
+.ceil__lights { position: absolute; inset: 0; }
+.ceil__lights i {
+  position: absolute; top: 0; bottom: 0; background: #ffe3a8; box-shadow: 0 0 40px 14px rgba(255, 190, 110, 0.55);
+  -webkit-mask: repeating-linear-gradient(to bottom, #000 0, #000 46px, transparent 46px, transparent 360px);
+  mask: repeating-linear-gradient(to bottom, #000 0, #000 46px, transparent 46px, transparent 360px);
+}
+.ceil__lights i:nth-child(1) { left: 38%; width: 24%; }
+.ceil__lights i:nth-child(2) { left: 8%; width: 18%; -webkit-mask-position: 0 180px; mask-position: 0 180px; }
+.ceil__lights i:nth-child(3) { left: 74%; width: 18%; -webkit-mask-position: 0 180px; mask-position: 0 180px; }
+
+/* o fundo do corredor: o balcão e o letreiro */
+.plane--end {
+  left: -380px; top: -300px; width: 760px; height: 560px; transform: translate3d(0, 0, -3800px);
+  background: radial-gradient(60% 55% at 50% 38%, #4a1a1f, #1d0a0e 80%);
+}
+.end__stripe { position: absolute; left: 0; right: 0; top: 230px; height: 14px; background: linear-gradient(var(--tomato), var(--tomato-deep)); box-shadow: 0 18px 0 -6px rgba(219, 169, 68, 0.8), 0 0 30px rgba(180, 69, 44, 0.4); }
+.end__neon {
+  position: absolute; left: 50%; top: 70px; transform: translateX(-50%); width: 560px; line-height: 0;
+  filter: drop-shadow(0 0 10px rgba(232, 69, 43, 0.75)) drop-shadow(0 0 34px rgba(232, 69, 43, 0.45));
+  animation: neon 6s ease-in-out infinite;
+}
+.end__neon img { width: 100%; height: auto; display: block; }
+.end__counter { position: absolute; left: 110px; right: 110px; bottom: 0; height: 190px; background: linear-gradient(#4a2a1a, #2a160d); border-top: 14px solid #a8774a; box-shadow: inset 0 -30px 40px rgba(0, 0, 0, 0.5), 0 -20px 60px rgba(255, 170, 90, 0.18); }
+.end__counter::before { content: ''; position: absolute; left: 12%; right: 12%; top: 30px; height: 56px; background: repeating-linear-gradient(90deg, rgba(219, 169, 68, 0.85) 0 44px, transparent 44px 52px); opacity: 0.8; }
+.end__posters { position: absolute; left: 70px; right: 70px; top: 270px; height: 120px; background:
+  repeating-linear-gradient(90deg, var(--petrol) 0 62px, transparent 62px 80px, var(--mustard) 80px 142px, transparent 142px 160px, var(--tomato-deep) 160px 222px, transparent 222px 240px); opacity: 0.55; filter: saturate(0.8); }
+
+/* placas penduradas: cada departamento é uma estação do percurso */
+.sign3d {
+  position: absolute; left: -135px; top: -222px; width: 270px; pointer-events: auto; text-decoration: none; color: var(--cream-hi);
+}
+.sign3d__sway { transform-origin: 50% -90px; animation: sway 7s ease-in-out infinite; animation-delay: var(--sway-delay, 0s); }
+.sign3d__sway::before, .sign3d__sway::after { content: ''; position: absolute; top: -90px; width: 3px; height: 92px; background: #8a6a3d; }
+.sign3d__sway::before { left: 34px; } .sign3d__sway::after { right: 34px; }
+.sign3d__board {
+  display: flex; align-items: center; gap: 12px; padding: 10px 16px 9px; background: linear-gradient(180deg, #4a1b27, var(--wine-800)); border: 2px solid rgba(235, 190, 110, 0.7); border-radius: 8px;
+  box-shadow: 0 1px 0 rgba(255, 226, 170, 0.3) inset, 0 14px 30px rgba(0, 0, 0, 0.55), 0 0 40px rgba(255, 170, 90, 0.12);
+}
+.sign3d__no { font: 700 20px/1 var(--f-sign); background: var(--mustard); color: var(--ink); padding: 6px 7px 4px; letter-spacing: 0.04em; border-radius: 3px; }
+.sign3d__name { font: 600 34px/1 var(--f-display); letter-spacing: 0.02em; }
+.sign3d:hover .sign3d__board { border-color: var(--mustard); }
+
+/* luz e lente: vinheta, calor no centro e grão de filme por cima do corredor (sem tocar nas interações) */
+.hall__tone { position: absolute; inset: 0; background:
+  radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255, 170, 90, 0.1), transparent 70%),
+  radial-gradient(ellipse 120% 95% at 50% 42%, transparent 45%, rgba(10, 3, 5, 0.78) 100%),
+  linear-gradient(rgba(12, 4, 6, 0.28), rgba(12, 4, 6, 0.28)); }
+.hall__tone::after { content: ''; position: absolute; inset: 0; background: url('/img/noise.svg') 0 0 / 220px 220px; opacity: 0.09; mix-blend-mode: overlay; }
+
+@keyframes neon { 0%, 100% { opacity: 1; } 50% { opacity: 0.86; } 52% { opacity: 1; } }
+@keyframes sway { 0%, 100% { transform: rotate(-0.6deg); } 50% { transform: rotate(0.6deg); } }
+
+@media (max-width: 720px) {
+  .hall__stage { perspective: 760px; perspective-origin: 50% 40%; }
+  .sign3d { display: none; }
+}
+.no-3d .hall__world { display: none; }
+.no-3d .hall { background: url('/img/scene/shelves.svg') 0 0 / 840px 560px repeat, #2a0e16; }
+@media (prefers-reduced-motion: reduce) {
+  .end__neon, .sign3d__sway { animation: none; }
+}
